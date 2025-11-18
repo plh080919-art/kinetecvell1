@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продаж авто</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Сайт продажу авто</h1>
+        <nav>
+            <button onclick="showTab('buy')">Купити авто</button>
+            <button onclick="showTab('sell')">Продати авто</button>
+            <button onclick="showTab('register')">Реєстрація</button>
+            <button onclick="showTab('about')">Про нас</button>
+            <button onclick="showTab('cart')">Оплата</button>
+        </nav>
+    </header>
+
+    <main>
+        <div id="buy" class="tab">
+            <h2>Купити авто</h2>
+                <div class="car">
+                    <img src="car1.jpg" alt=" ">
+                    <h3>Марка: AUDI S6</h3>
+                    <div>
+                        <p>Ціна: 4 410 103 грн</p>
+                        <button onclick="addToCart(4410103)">Додати в кошик</button>
+                    </div>
+                    <p>Тип кузова: Седан або універсал (Avant)</p>
+                    <p>Двигун 3.0L V6 TDI (Європа) або 2.9L V6 бензин (США)</p>
+                    <p>Потужність Від 344 до 450 к.с.</p>
+                    <p>Привід Постійний повний (quattro)</p>
+                    <p>Коробка передач 8-ступенева автоматична</p>
+                    <p>Розгін 0–100 км/год ~5 секунд</p>
+                    <p>Максимальна швидкість Електронно обмежена до 250 км/год</p>
+                </div>
+            <div class="car">
+                <img src="car2.jpg" alt=" ">
+                <h3>Марка: Honda Civic</h3>
+                <div>
+                    <p>Ціна: 1 830 000 грн</p>
+                    <button onclick="addToCart(1830000)">Додати в кошик</button>
+                </div>
+                <p>Тип кузова Ліфтбек (5 дверей, 5 місць)</p>
+                <p>Двигун 2.0 i-MMD гібрид (бензиновий + електро)</p>
+                <p>Потужність 184 к.с.</p>
+                <p>Привід Передній</p>
+                <p>Коробка передач e-CVT (електронний варіатор)</p>
+                <p>Розгін 0–100 км/год 7.8 секунд</p>
+                <p>Максимальна швидкість 180 км/год</p>
+            </div>
+            <div class="car">
+                <img src="car3.jpg" alt=" ">
+                <h3>Марка: Mini Cooper</h3>
+                <p>Ціна: 1 224 755 грн</p>
+                <button onclick="addToCart(1224755)">Додати в кошик</button>
+                <p>Тип кузова Хетчбек (3 або 5 дверей, 4 місця)</p>
+                <p>Двигун 1.5 л, 3-циліндровий, турбований бензиновий</p>
+                <p>Потужність 136 к.с.</p>
+                <p>Привід Передній</p>
+                <p>Коробка передач 6-ступенева автоматична Steptronic</p>
+                <p>Розгін 0–100 км/год 7.8 секунд</p>
+                <p>Максимальна швидкість 209 км/год</p>
+            </div>
+            <h2>Загальна сума: <span id="total">0</span> грн</h2>
+
+            <div class="rating">
+                <label>Ваша оцінка:</label>
+                <input type="number" min="1" max="5" class="star-rating">
+                <button class="submit-review">Залишити відгук</button>
+            </div>
+</main>
+        <div id="sell" class="tab" style="display:none;">
+            <h2>Продати авто</h2>
+            <form id="sellForm" onsubmit="submitSellForm(event)">
+                <input type="text" placeholder="Марка авто" required>
+                <input type="number" placeholder="Ціна" required>
+                <input type="file" accept="image/*" required>
+                <button type="submit">Додати авто</button>
+            </form>
+        </div>
+
+        <div id="register" class="tab" style="display:none;">
+            <h2>Реєстрація</h2>
+            <form id="registerForm" onsubmit="registerUser(event)">
+                <input type="text" placeholder="Ім'я" required>
+                <input type="password" placeholder="Пароль" required>
+                <button type="submit">Зареєструватися</button>
+            </form>
+        </div>
+    </main>
+
+    <div id="about" class="tab" style="display:none;">
+        <h2>Про нас</h2>
+        <p>Ми - команда професіоналів, які допомагають вам знайти ідеальне авто.</p>
+        <h3>Контактні дані</h3>
+        <p>Телефон: +380 12 345 6789</p>
+        <p>Email: info@autosite.com</p>
+        <h3>Адреса</h3>
+        <p>вул. Автогонщиків, 11, Київ, Україна</p>
+        <h3>Відео про наші автомобілі</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/nNrSh2XaJAc?si=04y15b6IwYXaZOBv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </form>
+</div>
+
+<div id="cart" class="tab" style="display:none;">
+    <h2>Карта</h2>
+    <div id="cartItems"></div>
+    <h3>Додати платіжні дані</h3>
+    <form id="paymentForm" onsubmit="processPayment(event)">
+        <input type="text" placeholder="Номер картки" required>
+        <input type="text" placeholder="Дата закінчення (ММ/РР)" required>
+        <input type="text" placeholder="CVV" required>
+        <button type="submit">Оплатити</button>
+    </form>
+</div>
+</main>
+    <script src="script.js">
+          let total = 0;
+
+function addToCart(price) {
+    total += price;
+    document.getElementById('total').innerText = total;
+}
+       
+    </script>
+</body>
+</html>
+
